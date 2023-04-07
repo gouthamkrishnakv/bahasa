@@ -1,0 +1,3 @@
+# Remove the virtualenv, if exists
+.venv/
+**/__pycache__/
