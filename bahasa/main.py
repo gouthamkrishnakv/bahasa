@@ -1,6 +1,4 @@
-from os import error
 from cv2 import VideoCapture
-import numpy
 import cv2
 
 def main():
