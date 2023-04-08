@@ -24,6 +24,7 @@ class VCDevice:
             # Check if frame exists
             if not ret:
                 isErrored, errorVal = True, "Can't recieve from camera!"
+                break
             # Process the frame from the pipeline
             processed_frame = self.run_pipeline(frame)
             # Show the frame
