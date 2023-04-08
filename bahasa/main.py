@@ -8,13 +8,13 @@ def main():
         print("Error in finding camera")
         exit(1)
     
+    print("Click `q` in the window to close it.")
+    
     while True:
         ret, frame = vcap.read()
-
         if not ret:
             print(f"Can't recieve from camera (stream end?). Exiting")
             exit(1)
-
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Display the grayscale
         cv2.imshow('frame', gray)
