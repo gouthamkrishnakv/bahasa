@@ -1,6 +1,6 @@
 # Python OpenCV Simple Start
 
-# Install Virtual Environment (`virtualenv`) for project
+## Install Virtual Environment (`virtualenv`) for project
 
 ```bash
 # Install Virtualenv (if not installed)
@@ -15,7 +15,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# Run the application
+## Run the application
 
 In the same shell run
 
