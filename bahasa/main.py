@@ -35,6 +35,7 @@ class NNFaceRecogPipeline(ImagePipeline):
 
     def run(self, frame: np.array) -> np.array:
         result = NNFaceRecogPipeline.nn_model(frame)
+        print(str(f" FACES: {result.xyxyn[0].shape[0]}"), end="\r")
         return result.render()[0]
 
 class VCDevice:
@@ -42,6 +43,7 @@ class VCDevice:
     vcDevice: cv2.VideoCapture
     pipelines: List[ImagePipeline]
     latencies: np.ndarray
+    lastLatency: float
     lastTimeTaken: int = 0
 
     def __init__(self, vcIndex: int = 0):
@@ -52,6 +54,7 @@ class VCDevice:
         self.pipelines = []
         self.latencies = np.array([], dtype='float64')
         self.lastTimeTaken = 0
+        self.lastLatency = 0.0
         # Add face recognition pipeline
         # self.pipelines.append(CascadeFaceRecogPipeline())
         self.pipelines.append(NNFaceRecogPipeline())
@@ -79,9 +82,10 @@ class VCDevice:
             end_time = time.perf_counter()
             # Calculate latencies for the pipeline to run
             self.latencies = np.append(self.latencies, end_time - start_time)
+            print("\rLATENCY: {:06.3f}s".format(np.average(self.lastLatency)), end="")
             if (processed_time := floor(time.process_time())) > self.lastTimeTaken:
+                self.lastLatency = np.average(self.latencies)
                 self.lastTimeTaken = processed_time
-                print("\rLATENCY: {:06.3f}s".format(np.average(self.latencies)), end="")
                 self.latencies = np.array([], dtype='float64')
             # Show the frame
             cv2.imshow('frame', final_frame)
