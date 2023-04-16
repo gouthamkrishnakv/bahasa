@@ -1,6 +1,6 @@
 from math import floor
 import time
-from typing import List, Protocol
+from typing import List
 import cv2
 import numpy as np
 

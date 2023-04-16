@@ -1,8 +1,8 @@
 from .base import ImagePipeline, np
 import torch
 
-assert torch.cuda.is_available(), "Cuda is not available"
-print("Cuda is available")
+assert torch.cuda.is_available(), "Torch Init: Cuda is not available"
+print("Torch Init: Cuda is available")
 
 
 class NNFaceRecogPipeline(ImagePipeline):
