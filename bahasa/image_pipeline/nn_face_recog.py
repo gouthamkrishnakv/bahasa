@@ -6,7 +6,9 @@ print("Torch Init: Cuda is available")
 
 
 class NNFaceRecogPipeline(ImagePipeline):
-    nn_model = torch.hub.load('./yolov5', 'custom', source='local', path='models/nn_exp/weights/best.pt')
+    nn_model = torch.hub.load(
+        "./yolov5", "custom", source="local", path="models/nn_exp/weights/best.pt"
+    )
 
     def __init__(self) -> None:
         pass

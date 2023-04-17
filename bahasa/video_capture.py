@@ -7,6 +7,7 @@ import numpy as np
 from .image_pipeline.base import ImagePipeline
 from .image_pipeline import nn_face_recog, cascade_face_recog
 
+
 class VCDevice:
     vcIndex: int
     vcDevice: cv2.VideoCapture
@@ -21,7 +22,7 @@ class VCDevice:
         if not self.vcDevice.isOpened():
             raise OSError(1, "Error in finding camera")
         self.pipelines = []
-        self.latencies = np.array([], dtype='float64')
+        self.latencies = np.array([], dtype="float64")
         self.lastTimeTaken = 0
         self.lastLatency = 0.0
         # Add face recognition pipeline
@@ -34,7 +35,7 @@ class VCDevice:
         for pipeline in self.pipelines:
             frame = pipeline.run(frame)
         return frame
-    
+
     def run(self):
         isErrored, errorVal = False, None
         while True:
@@ -56,11 +57,11 @@ class VCDevice:
             if (processed_time := floor(time.process_time())) > self.lastTimeTaken:
                 self.lastLatency = np.average(self.latencies)
                 self.lastTimeTaken = processed_time
-                self.latencies = np.array([], dtype='float64')
+                self.latencies = np.array([], dtype="float64")
             # Show the frame
-            cv2.imshow('frame', final_frame)
+            cv2.imshow("frame", final_frame)
             # Wait 1ms for a key clicked
-            if cv2.waitKey(1) == ord('q'):
+            if cv2.waitKey(1) == ord("q"):
                 break
         self.vcDevice.release()
         cv2.destroyAllWindows()
